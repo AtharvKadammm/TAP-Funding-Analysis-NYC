@@ -26,7 +26,7 @@ This project presents a statistical analysis of New York State's Tuition Assista
 - Atharv Kadam  
 - Rahul Ganesan  
 - Dnyaneshwari Rakshe  
-> MS Business Analytics – University of Colorado Boulder
+> MS Data Science – University of Colorado Boulder
 
 ---
 
