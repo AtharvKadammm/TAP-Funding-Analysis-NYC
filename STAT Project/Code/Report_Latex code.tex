@@ -1,0 +1,350 @@
+%%
+%% This is file `main.tex' based on `sample-sigconf.tex' (q.v. for spurce of that,
+%%
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the original source file `sample-sigconf.tex'
+%% in the `Sample' folder.
+%%
+%% For distribution of the original source see the terms
+%% for copying and modification in the file samples.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+%% Commands for TeXCount
+%TC:macro \cite [option:text,text]
+%TC:macro \citep [option:text,text]
+%TC:macro \citet [option:text,text]
+%TC:envir table 0 1
+%TC:envir table* 0 1
+%TC:envir tabular [ignore] word
+%TC:envir displaymath 0 word
+%TC:envir math 0 word
+%TC:envir comment 0 0
+%%
+%%
+%% The first command in your LaTeX source must be the \documentclass command.
+
+%% NOTE that a single column version is required for 
+%% submission and peer review. This can be done by changing
+%% the \doucmentclass[...]{acmart} in this template to 
+%%\documentclass[manuscript,review,anonymous]{acmart}
+%% This version is used for drafting and final submission
+\documentclass[sigconf]{acmart}
+
+
+%% % Location of your graphics files for figures, here a sub-folder to the main project folder
+\graphicspath{{./images/}} 
+
+\settopmatter{printacmref=false} % Disable ACM reference format
+\renewcommand\footnotetextcopyrightpermission[1]{} % Removes the footnote
+
+
+\begin{document}
+
+%%
+%% The "title" command has an optional parameter,
+%% allowing the author to define a "short title" to be used in page headers.
+\title{Tuition Assistance Program - Funding Analysis Across NYC Institutions}
+
+%%
+%% The "author" command and its associated commands are used to define
+%% the authors and their affiliations.
+%% Of note is the shared affiliation of the first two authors, and the
+%% "authornote" and "authornotemark" commands
+%% used to denote shared contribution to the research.
+\author{Rahul Ganesan}
+\email{raga7935@colorado.edu}
+\affiliation{%
+  \institution{University of Colorado Boulder
+Boulder, Colorado, USA}
+}
+
+\author{Atharv Kadam}
+\email{atka9416@colorado.edu}
+\affiliation{%
+  \institution{University of Colorado Boulder
+Boulder, Colorado, USA}
+}
+
+\author{Dnyaneshwari Rakshe}
+\email{dnra6230@colorado.edu}
+\affiliation{%
+  \institution{University of Colorado Boulder
+Boulder, Colorado, USA}
+}
+
+\pagestyle{fancy}
+\fancyhf{} % Clears all header and footer fields
+\renewcommand{\headrulewidth}{0pt} % Removes header rule
+
+%% The abstract is a short summary of the work to be presented in the
+%% article.
+\begin{abstract}
+In this project, we have examined the patterns and trends within the New York State Tuition Assistance Program (TAP) dataset. This analysis will help us understand the relationships between different features like financial aid, demographic factors, and educational institutions. We conducted a thorough analysis across several attributes like academic age, income ranges, recipient age groups, and sector types (public vs. private, community vs. non-community colleges). We specifically focused on areas like analyzing trends over academic years, evaluating the impact of income range on financial aid distribution between CUNY and SUNY institutions, and exploring the relationship between TAP dollars awarded and full-time equivalent (FTE) enrollments. We implemented both basic and advanced statistical methodologies to provide actionable insights by comprehensive analysis into TAP funding patterns and suggest the patterns or trends to the institutions and policymakers.
+\end{abstract}
+
+
+%% Keywords. The author(s) should pick words that accurately describe
+%% the work being presented. Separate the keywords with commas.
+\keywords{Statistical Methods, Two-sample test, Hypothesis Testing, ANOVA, Linear Regression, Chi-square test, Tuition Assistance Program, Funding Analysis, NYC, CUNY, SUNY, TAP, TAP Receipient Dollars, Age Group Disparities, Income Range Impact, Sector Type Analysis, Educational Financial Aid, TAP Financial Status, Statistical Significance, Higher Education Funding, Demographic Analysis, Welch's ANOVA, Dependent and Independent Variables, Statistical Modeling}
+
+\maketitle
+
+\section{Introduction}
+The New York State Tuition Assistance Program (TAP) is one of the largest need-based grant programs in the United States. It provides a critical assistance to the students by providing financial aid for pursuing higher education across various academic institutions. It was established with a purpose to reduce financial barriers for the students. This program offers grants based on different eligibility factors like family income, dependency status, and tuition costs. TAP grants awards of up to \$ 5,665 per year. 
+
+This program is different from granting loans because these grants do not require repayment. Hence, this makes TAP a crucial resource for low- and middle-income families. TAP funding supports both public institutions like SUNY and CUNY and private colleges across the state so that students have equitable access to education.
+
+Over the last 23 years, TAP policies have evolved significantly by taking the changing economic and educational landscapes into consideration. Based on the information from TAP official website, it has been observed that this program has expanded eligibility to part-time students, adjusted income thresholds, and increased funding allocations over the time. These changes have helped in enhancing the program's reach, and allowing it to support a broader range of students. 
+
+\begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.54]{TAP Milestones.png} 
+    \caption{Key Changes in the TAP over the years}
+    \label{fig:data_collection} 
+\end{figure}
+
+\section{Dataset Description: }
+The dataset that we considered while working on this project included key information such as income ranges, age groups, financial dependency status, and institutional types such as  CUNY, SUNY, and independent colleges. This dataset consisted of records for over 23 academic years. We majorly focused on identifying meaningful insights from the dataset so that we can help decision makers to understand into how financial aid is distributed and utilized, based on different factors like demographic and institutional disparities.
+
+The dataset consists a total of 259,983 rows and 16 columns. It includes both numerical and categorical variables. It consists of following key variables:
+
+\begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.54]{Attribute table.png}
+    \caption{Attribute Description}
+    \label{fig:data_collection}
+\end{figure}
+
+\section{Statistical Methodologies: }
+
+In this project, we conducted a comprehensive analysis by starting with exploratory data analysis (EDA) and then implementing advanced statistical methodologies. Statistical tests played an important role in uncovering significant relationships between different attributes of the data. We implemented following statistical tests to achieve different objectives:
+
+\begin{itemize}
+    \item A two-sample t-test
+    \item Chi-square test
+    \item ANOVA (Analysis Of Variance)
+    \item Linear Regression Analysis
+\end{itemize}
+
+
+\subsection{Exploratory Data Analysis (EDA):}
+\begin{enumerate}
+    \item \textbf{Data Collection:}
+    \begin{itemize}
+        \item \textbf{Objective}: Loading and inspecting the dataset so that we can understand its basic structure and properties.
+        \item \textbf{Steps Implemented}: We started by loading the dataset into a Pandas DataFrame for comprehensive analysis. We assessed the dataset information like the types of the columns, checking for null/missing values. Basically, we tried to get an overview of the dataset.
+        \item \textbf{Observations}: We observed that the dataset consists of 259,983 rows and 16 columns. The columns include both numerical attributes (e.g., TAP Recipient Dollars, TAP Recipient Headcount) and categorical attributes (e.g., TAP Financial Status).
+    \end{itemize}
+    \item \textbf{Data Cleaning:}
+    \begin{itemize}
+        \item \textbf{Objective}: We cleaned the dataset by handling missing values and correcting data inconsistencies.
+        \item \textbf{Steps Implemented}: Checked for missing values in the dataset using .isna().sum() function. Removed rows with missing values using .dropna() function. Renamed the inconsistent column names - e.g., TAP Recipient Headcount to TAP Recipient Headcount).
+        \item \textbf{Observations}: We ensured that data integrity is maintained by handling the missing values, and renaming the inconsistent column names.
+    \end{itemize}
+    \item \textbf{Descriptive Statistical Analysis:}
+    \begin{itemize}
+        \item \textbf{Objective}: We obtained summary statistics for numerical attributes and understood the data distribution.
+        \item \textbf{Steps Implemented}: We used .describe() function to compute descriptive statistics, like calculating the mean, median, standard deviation, minimum, and maximum values for each numerical attribute.
+        \item \textbf{Observations}: With the help of .describe() function, the data was displayed as a range of values for key numerical variables. This helped us in detecting potential outliers or extreme values in the dataset.
+    \end{itemize}
+    \item \textbf{Data Normalization:}
+    \begin{itemize}
+        \item \textbf{Objective}: We implemented data normalization for scaling the numerical variables in order to ensure more accurate comparisons and modeling.
+        \item \textbf{Steps Implemented}: We applied the StandardScaler function from sklearn.preprocessing to standardize numerical columns such as TAP Recipient Headcount, TAP Recipient FTEs, and TAP Recipient Dollars.
+        \item \textbf{Observations}: The dataset attributes were normalized. This allowed for more comparable scaled values across numerical variables. We implemented this step because it was especially important for implementing further statistical modeling techniques.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Data Distributions:}
+We created various visualizations to gain meaningful insights from the data, to explore trends, distributions, and relationships within the dataset. These visualizations helped us in understanding the key aspects of TAP funding, such as recipient demographics, funding trends, and correlations between different attributes like headcount, FTEs, and recipient dollars. We specifically implemented following visualizations: trends in recipient headcounts by dollar range, funding distributions for dependent and independent students, age group trends across academic years, trends across degree versus non-degree programs, and student group sizes. These visualizations helped us by providing a comprehensive view of the dataset in order to derive valuable insights and implement statistical methodologies on the data.
+
+\subsubsection{\textbf{Trend of Recipient Headcounts by Dollar Range}}
+
+\begin{itemize}
+    \begin{figure}[h] 
+        \centering
+        \includegraphics[scale=0.25]{Viz1.png} 
+        \caption{Trend of Recipient Headcounts by Dollar Range}
+        \label{fig:data_viz}
+    \end{figure}
+    \item \textbf{Insights}:
+    We observed notable patterns while analyzing the trend of recipient headcounts w.r.t dollar range. The "1M+" range showed a significant rise in headcounts during the early 2000s, it then peaked and sharply declined after 2015.The "100K-500K" range also shows a steady decline after peaking around 2009–2010. On the other hand, lower dollar ranges like "0-10K" and "10K-50K" remained relatively stable, and showed minor fluctuations over time. The dominance of higher dollar ranges ("1M+" and "100K-500K") in headcounts helped us in highlighting disparities in the funding distribution, as recent declines were observed in these ranges which potentially reflected the implementation of policy changes, economic shifts, or revised allocation strategies.
+\end{itemize}
+
+\subsubsection{\textbf{Trend of Dependent and Independent Funding}}
+\begin{itemize}
+    \begin{figure}[h] 
+        \centering
+        \includegraphics[scale=0.25]{Viz2.png}
+        \caption{Trend of Dependent and Independent Funding}
+        \label{fig:data_viz}
+    \end{figure}
+    \item \textbf{Insights}:
+    The trend of dependent and independent funding helped us in highlighting a fact that financially dependent recipients(blue line) consistently outnumbered financially independent recipients(orange line) throughout the observed period of time. We can also observe that the dependent headcounts peaked around 2010 but experienced a steep decline after 2015, and then stabilizing slightly after 2020. In contrast, the independent headcounts exhibited a steady decline over the years, with a sharper drop after 2015. While both the groups experienced declines, the decline was proportionally sharper for independent recipients. These trends might correspond to policy, economic, or funding shifts, such as changes in eligibility criteria, program budgets, or external factors like tuition trends or student demographics.
+\end{itemize}
+
+\subsubsection{\textbf{Trend of Recipient Age Groups Across Academic Years}}
+\begin{itemize}
+    \begin{figure}[h] 
+        \centering
+        \includegraphics[scale=0.25]{Viz3.png}
+        \caption{Trend of Recipient Age Groups Across Academic Years}
+        \label{fig:data_viz}
+    \end{figure}
+    \item \textbf{Insights}:
+    The trend of recipient age groups across academic years helped us understand key patterns in TAP funding distribution. We can observe that the students "under age 22" group consistently have the highest recipient headcounts, which peaked around 2010 before it experienced a sharp decline after 2015 and was stabilized slightly after 2020. For other age groups, such as "age 22-25" and "age 26-35," we can observe relatively steady trends with minor fluctuations over time but it also exhibits declines starting around 2015. The "age 36-50" and "over age 50" groups remain the smallest categories throughout the period, with minimal changes. Basically, the overall decline across all age groups after 2015 may be attributed to changes in funding policies, eligibility criteria, or demographic shifts affecting the TAP program's reach.
+\end{itemize}
+
+\subsubsection{\textbf{Trend of Degree or Non Degree Across Academic Years}}
+\begin{itemize}
+    \begin{figure}[h] 
+        \centering
+        \includegraphics[scale=0.25]{Viz4.png}
+        \caption{Trend of Degree or Non Degree Across Academic Years}
+        \label{fig:data_viz}
+    \end{figure}
+    \item \textbf{Insights}:
+    The trend of degree versus non-degree recipients across academic years highlights a disparity in headcounts. It can be observed that the degree recipients consistently formed the overwhelming majority, which peaked around 2010 and subsequently showed a steady decline after 2015, with a slight stabilization post-2020. However, on the other hand, the headcount for non-degree recipients remains negligible throughout the period, and this indicates that TAP funding primarily supports degree-seeking students. In this way, the overall decline in degree recipients after 2015 could be considered as a result of the policy changes, funding constraints, or evolving student enrollment patterns.
+\end{itemize}
+
+\subsubsection{\textbf{Number of Students in Each Group}}
+\begin{itemize}
+    \begin{figure}[h] 
+        \centering
+        \includegraphics[scale=0.35]{Viz5.png}
+        \caption{Number of Students in Each Group}
+        \label{fig:data_viz}
+    \end{figure}
+    \item \textbf{Insights}:
+    The visualization displaying the number of students in each group underscores the clear dominance of degree-seeking students in the TAP program. The count of degree recipients is significantly higher and has crossed 8 million, whereas the number of non-degree recipients which is around 930, it is negligible as compared to the degree-seeking students. This stark difference highlights that TAP funding highly supports students pursuing degrees, but have minimal allocation to non-degree programs. This distribution highlights us that the program majorly focuses on aiding higher education through structured degree pathways.
+\end{itemize}
+
+
+\subsubsection{\textbf{Correlation Heatmap of Headcount, FTEs and recipient dollars}}
+\begin{itemize}
+    \begin{figure}[h] 
+        \centering
+        \includegraphics[scale=0.35]{Viz6.png} 
+        \caption{Correlation Heatmap of Headcount, FTEs and recipient dollars} 
+        \label{fig:data_viz} 
+    \end{figure}
+    \item \textbf{Insights}:
+    The correlation heatmap helps in revealing strong relationships among three different attributes including TAP recipient headcounts, full-time equivalents (FTEs), and recipient dollars. Based on the visualization, we can observe that there is a perfect correlation (1.00) between headcount and FTEs, which indicates that these metrics are directly proportional and closely linked. Additionally, the recipient dollars showcase a very high correlation (0.94) with both headcount and FTEs, and suggests that funding allocation is strongly tied to the number of recipients and their enrollment status. These insights strongly indicate that the distribution of TAP funds align proportionally with student participation, and reflects a systematic funding approach based on enrollment metrics.
+\end{itemize}
+
+
+\section{Hypothesis Testing:}
+
+\textbf{Overview:}
+In a two-sample t-test we compared the mean TAP recipient dollars between Financial Independent and Financial Dependent groups; in Chi-Square test we examined the relationship between TAP Financial Status and TAP Degree or NonDegree classifications; we implemented ANOVA tests to evaluate differences in TAP recipient dollars across different TAP Sector Groups and Recipient Age Group categories; and linear regression analyses to investigate relationships between TAP Recipient Headcount and TAP Recipient Dollars, as well as the impact of TAP Level of Study, Sector Type, and Income Range on TAP recipient dollars. 
+
+\subsection{2 sample T-Test}
+\begin{itemize}
+    \item \textbf{Objective}: We conducted a two-sample one-sided t-test to evaluate whether there is a significant difference in the mean TAP Recipient Dollars between financially independent and financially dependent groups.
+    \item \textbf{Output}:
+    \begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.125]{H1Res.jpg} 
+    \caption{2 sample T-Test} 
+    \label{fig:data_testing} 
+    \end{figure}
+    \item \textbf{Interpretation}: The results of the t-test received during this hypothesis testing, gave us a T-statistic value of 14.1451 and a p-value of 0.0000, indicating strong statistical significance (p < 0.05). As a result, we reject the null hypothesis (H$_0$) and concluded that there is a significant difference in TAP Recipient Dollars between the two groups. Specifically it was observed that the mean TAP Recipient Dollars for the financially independent group is significantly greater as compared to the financially dependent group. This observation highlighted that the financial independence might be associated with higher TAP Recipient Dollars, indicating further exploration of the underlying factors that contribute to this disparity.
+\end{itemize}
+
+\subsection{ANOVA - Testing Differences in TAP Recipient Dollars Across Recipient Age Group Categories}
+\begin{itemize}
+    \item \textbf{Objective}: We implemented a Welch's ANOVA test to investigate whether TAP Recipient Dollars significantly differ across various age groups, where we considered unequal variances between the groups.
+    \item \textbf{Output}:
+    \begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.12]{H2Res.jpg} 
+    \caption{ANOVA analysis across Recipient Age Groups} 
+    \label{fig:data_testing} 
+    \end{figure}
+    \item \textbf{Interpretation}:
+    After Levene's test was implemented, it was identified that the variances among age groups were significantly different (p < 0.05), which justifies the application of Welch's ANOVA. The ANOVA results highlighted that TAP Recipient Dollars varied significantly across different age groups (F = 489.27, p < 0.001). After additional analysis through regression coefficients we received following insights:  
+    \begin{enumerate}
+        \item Age 26-35: For age 26-35, the p-value (0.841) is large, so we fail to reject the null hypothesis, meaning there is no significant difference in TAP recipient dollars for this group as compared to the reference group.
+        \item For the other age groups (age 36-50, over age 50, and under age 22), the p-values are all less than 0.05, meaning we reject the null hypothesis in each case and conclude that the differences in TAP recipient dollars are statistically significant for these age groups.
+    \end{enumerate}
+    
+\end{itemize}
+\subsection{Chi-Square Test}
+\begin{itemize}
+    \item \textbf{Objective}: We implemented a Chi-Square Test for Independence to examine and understand the association between TAP Financial Status and TAP Degree or NonDegree.
+    \item \textbf{Output}:
+    \begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.15]{H3Res.jpg} 
+    \caption{Chi-Square Test } 
+    \label{fig:data_testing} 
+    \end{figure}
+    \item \textbf{Interpretation}: The results received from the Chi-Square test i.e., chi-square statistic = 44.8589, and p-value = 0.0000,  indicate a significant association between the two attributes - TAP Financial Status and TAP Degree or NonDegree because the p-value is less than the significance level of 0.05. This indicates that the two attributes are related to each other which means that TAP Financial Status is strongly associated with whether individuals hold a degree or not.
+\end{itemize}
+
+\subsection{ANOVA - Testing Differences in TAP Recipient Dollars Across multiple Sector Groups}
+\begin{itemize}
+    \item \textbf{Objective}: We performed ANOVA test on the transformed dataset to determine whether there are significant differences in the mean TAP Recipient Dollars across different TAP Sector Groups.
+    \item \textbf{Output}:
+    \begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.12]{H4Res.jpg} 
+    \caption{ANOVA analysis Across multiple Sector Groups} 
+    \label{fig:data_testing} 
+    \end{figure}
+    \item \textbf{Interpretation}: We noted that the ANOVA test results showed a significant difference in TAP Recipient Dollars across the various TAP Sector Groups with scores like F-statistic = 35.97, p-value < 0.05. Hence, we reject the null hypothesis. This helped us detect that the mean TAP Recipient Dollars varies significantly across different sectors. Specifically, groups such as "BUS. NON-DEG" and "OTHER" showcased the largest reductions in TAP dollars as compared to the baseline group. Additionally, the p-values for most groups were observed to be well below the significance threshold and this helped us ensure that these differences are statistically significant.
+\end{itemize}
+\subsection{Linear Regression analysis}
+\begin{itemize}
+    \item \textbf{Objective}: We implemented the linear regression analysis to assess the impact of TAP level of study, sector type, and income range on TAP Recipient Dollars.
+    \item \textbf{Output}:
+    \begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.16]{H5Res.jpg} 
+    \caption{Linear Regression analysis} 
+    \label{fig:data_testing} 
+    \end{figure}
+    \item \textbf{Interpretation}:
+    Upon observing the results, we found that the overall regression model is statistically significant (F-statistic = 230.7, p-value < 0.05), and indicates that at least one of the independent variables have an effect on TAP Recipient Dollars. Among the significant predictors, the "4-year Undergrad" group receives more TAP dollars, whereas the "5-year Undergrad" and "Graduate" groups receive less TAP dollars as compared to the baseline group (2-year Undergrad). The remaining categories for TAP level of study were not found to significantly affect TAP dollars. Additionally, it was found that the higher income ranges were associated with a decrease in TAP Recipient Dollars.
+\end{itemize}
+
+\subsection{Linear regression}
+\begin{itemize}
+    \item \textbf{Objective}: We conducted a Pearson correlation and linear regression analysis in order to investigate the relationship between TAP Recipient Headcount and TAP Recipient Dollars.
+    \item \textbf{Output}:
+    \begin{figure}[h] 
+    \centering
+    \includegraphics[scale=0.146]{H6Res.jpg} 
+    \caption{Linear regression} 
+    \label{fig:data_testing} 
+    \end{figure}
+    \item \textbf{Interpretation}: Based on the results we received, we found that the Pearson correlation coefficient of 0.9370 indicates a very strong positive linear relationship between the two attributes - TAP Recipient Headcount and TAP Recipient Dollars, and a p-value of 0.0000 confirms the statistical significance of this correlation. Even the linear regression model further supports this, with a very high R-squared value of 0.878, which suggests that TAP Recipient Headcount explains approximately 87.8\% of the variation in TAP Recipient Dollars. In this way, it implies that as the headcount increases, TAP recipient dollars also tend to increase in a strongly predictable manner.
+
+\end{itemize}
+
+\section{Conclusion}
+In this way, the project provides a comprehensive analysis of different factors affecting the TAP (Tuition Assistance Program) recipient dynamics. With the help of statistical tests and modeling techniques we have derived significant insights into the patterns of TAP disbursement. 
+
+The results highlighted that the \textbf{financial independence} is associated with higher TAP Recipient Dollars, which showcased how the economic factors play a major role in shaping TAP distributions. Similarly, the age group differences highlighted through ANOVA tests demonstrated that TAP amounts vary significantly for different stages of life, with younger and older groups receiving different level of support as compared to the middle-aged groups. An analysis of \textbf{TAP sector groups} helped us understand the substantial variability in TAP Recipient Dollars across different sectors, for e.g., certain groups like "BUS. NON-DEG" and "OTHER" receive significantly reduced funding as compared to the other sectors. Additionally, the association between \textbf{TAP Financial Status} and \textbf{Degree/NonDegree attributes}, provided us an evidence for a strong interdependence between educational status and the financial attributes. Furthermore, linear regression analyses provided us a clarity by quantifying how study levels, sector types, and income ranges impact the TAP disbursements. It was observed that the lower levels of study and lower income ranges were associated with higher TAP dollars. Moreover, the strong positive correlation between TAP Recipient Headcount and the TAP Recipient Dollars highlighted the scalability of funding relative to the number of beneficiaries.
+
+In summary, this study underscores the multidimensional nature of TAP distribution across the United States, which is based on demographic, financial, and educational factors. We believe that these findings can guide policymakers and administrators in understanding and reforming the TAP funding allocation strategies to ensure equitable and efficient support for students, and addressing disparities for enhancing the program's overall effectiveness.
+
+
+%%
+%% The next two lines define the bibliography style to be used, and
+%% the bibliography file.
+
+\nocite{*}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references.bib}
+
+%%
+\end{document}
+\endinput
+%%
+%% End of file `main.tex'.
